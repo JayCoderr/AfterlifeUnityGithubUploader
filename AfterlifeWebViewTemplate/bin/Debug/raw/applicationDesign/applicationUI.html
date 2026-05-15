@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>Application UI</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #0b0f14;
+            color: white;
+            font-family: "Segoe UI", sans-serif;
+            overflow: hidden;
+        }
+
+        #root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .panel {
+            width: 90%;
+            min-height: 60%;
+            border-radius: 14px;
+            background: rgba(255,255,255,0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        h1 { margin: 0; font-size: 22px; }
+
+        p {
+            opacity: 0.7;
+            margin-top: 6px;
+            font-size: 13px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #1f6feb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover { background: #2b7cff; }
+
+        .input-group {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .input:focus {
+            border-color: #1f6feb;
+            box-shadow: 0 0 0 2px rgba(31,111,235,0.15);
+        }
+
+        .checkbox-row {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .checkbox-row input {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 10px;
+            z-index: 9999;
+        }
+
+        .toast {
+            min-width: 220px;
+            max-width: 320px;
+            padding: 12px 14px;
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-left: 4px solid #1f6feb;
+            border-radius: 10px;
+            font-size: 13px;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.hide {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .toast.success { border-left-color: #2ecc71; }
+        .toast.error { border-left-color: #e74c3c; }
+        .toast.info { border-left-color: #1f6feb; }
+		
+		#uploadArea {
+			width: 80%;
+			height: 180px;
+		
+			border-radius: 14px;
+			border: 2px dashed rgba(255,255,255,0.15);
+		
+			background: rgba(255,255,255,0.03);
+		
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		
+			transition: 0.2s ease;
+		
+			margin-top: 20px;
+		}
+		
+		#uploadArea.drag {
+			border-color: #1f6feb;
+			background: rgba(31,111,235,0.08);
+			transform: scale(1.01);
+		}
+		
+		.uploadTitle {
+			font-size: 18px;
+			font-weight: 600;
+		}
+		
+		.uploadSub {
+			margin-top: 8px;
+			font-size: 13px;
+			opacity: 0.7;
+		}
+    </style>
+</head>
+
+<body>
+
+<div id="root">
+    <div class="panel">
+        <h1>GitHub Upload Panel</h1>
+        <p>Afterlife Unity Git Tool</p>
+
+        <div class="input-group">
+            <input id="githubUser" class="input" type="text" placeholder="GitHub Username">
+            <input id="githubToken" class="input" type="password" placeholder="GitHub Token (PAT)">
+        </div>
+
+        <div class="input-group">
+            <input id="repoName" class="input" type="text" placeholder="Repository Name (e.g. MyRepo)">
+            <input id="branchName" class="input" type="text" placeholder="Branch (default: main)">
+			<input id="directoryPath" class="input" type="text" placeholder="Repository directory (e.g. Assets/Models)">
+			<input id="repoDescription" class="input" type="text" placeholder="Repository ReadMe Description (e.g. this is a test)">
+			<select id="repoVisibility" class="input">
+				<option value="private">Private repository</option>
+				<option value="public">Public repository</option>
+			</select>
+        </div>
+
+        <div class="checkbox-row">
+            <input id="saveToken" type="checkbox">
+            <label for="saveToken">Save all credentials locally (.txt file)</label>
+        </div>
+		
+		<div id="uploadArea" class="">
+			<div class="uploadTitle">Drop Files Or Folders Here</div>
+			<div class="uploadSub">
+				Supports multiple files and full folders
+			</div>
+			<div id="droppedList" style="
+				width:100%;
+				margin-top:10px;
+				max-height:120px;
+				overflow-y:auto;
+				font-size:12px;
+				opacity:0.85;
+			"></div>			
+		</div>
+    </div>
+
+</div>
+
+<div id="toast-container"></div>
+<script>
+async function loadConfig() {
+    try {
+        // =========================
+        // LOAD FROM LOCAL SERVER
+        // =========================
+
+        const res = await fetch("http://localhost:1337/json/config.json", {
+		
+            cache: "no-store"
+        });
+
+        if (!res.ok) {
+            console.warn("Config not found:", res.status);
+            return;
+        }
+
+        const config = await res.json();
+
+        // =========================
+        // FILL INPUTS
+        // =========================
+
+        document.getElementById("githubUser").value = config.user || "";
+        document.getElementById("githubToken").value = config.githubToken || "";
+        document.getElementById("repoName").value = config.repository || "";
+        document.getElementById("branchName").value = config.branch || "";
+        document.getElementById("directoryPath").value =
+            config.directoryPath || config.fullPath || "";
+        document.getElementById("repoDescription").value = config.repoDescription || "";
+        document.getElementById("repoVisibility").value = config.visibility || "private";
+
+        console.log("Config loaded ✔");
+    }
+    catch (err) {
+        console.error("Failed to load config:", err);
+    }
+}
+
+// =========================
+// AUTO RUN ON PAGE LOAD
+// =========================
+
+document.addEventListener("DOMContentLoaded", loadConfig);
+</script>
+<script>
+    // =========================
+    // PREVENT WEBVIEW2 FROM OPENING FILES
+    // BUT STILL ALLOW DROP EVENTS
+    // =========================
+    window.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    });
+
+    window.addEventListener("drop", (e) => {
+
+        // only block browser navigation
+        // if NOT dropped on upload area
+
+        if (!e.target.closest("#uploadArea")) {
+            e.preventDefault();
+        }
+    });
+</script>
+<script>
+    // =========================
+    // PREVENT BROWSER DEFAULT DROP
+    // =========================
+    document.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    });
+
+    document.addEventListener("drop", (e) => {
+        e.preventDefault();
+    });
+
+    // =========================
+    // WEBVIEW MESSAGE LISTENER
+    // =========================
+    if (window.chrome?.webview) {
+        window.chrome.webview.addEventListener("message", (event) => {
+            const data = event.data;
+
+            if (typeof data === "string" && data.startsWith("toast:")) {
+                const msg = data.substring(6);
+                console.log("TOAST:", msg);
+                showToast(msg);
+            }
+        });
+    }
+
+    // =========================
+    // ELEMENTS
+    // =========================
+    const uploadArea = document.getElementById("uploadArea");
+
+    // =========================
+    // DRAG UI
+    // =========================
+    if (uploadArea) {
+
+        uploadArea.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            uploadArea.classList.add("drag");
+        });
+
+        uploadArea.addEventListener("dragleave", () => {
+            uploadArea.classList.remove("drag");
+        });
+
+        // =========================
+        // DROP HANDLER
+        // =========================
+        uploadArea.addEventListener("drop", async (e) => {
+
+            e.preventDefault();
+            uploadArea.classList.remove("drag");
+
+            const files = [];
+            let folderCount = 0;
+			
+			const directoryPath =
+				document.getElementById("directoryPath")?.value?.trim() || "";
+			
+			const visibility =
+				document.getElementById("repoVisibility")?.value || "private";			
+
+            try {
+				// =========================
+				// READ FILES (SAFE FIX)
+				// =========================		
+				for (const file of Array.from(e.dataTransfer.files)) {
+				
+					try {
+				
+						if (!file) continue;
+						if (!(file instanceof File)) continue;
+				
+						const path = file.webkitRelativePath || file.name;
+				
+						// 🚨 ONLY accept REAL files with content structure
+						if (!file.name && !file.webkitRelativePath) {
+							console.warn("Skipping invalid entry:", file.name);
+							continue;
+						}
+				
+						const base64 = await readFileAsBase64(file);
+				
+						files.push({
+							name: file.name,
+							path: path,
+							size: file.size,
+							type: file.type || "",
+							content: base64
+						});
+				
+					}
+					catch (err) {
+						console.error("File read error:", file?.name, err);
+					}
+				}
+				
+				// =========================
+				// FOLDER DETECTION (RELIABLE FIX)
+				// =========================
+				const folderSet = new Set();
+				
+				for (const file of files) {
+				
+					const parts = file.path.split("/");
+				
+					let current = "";
+				
+					for (let i = 0; i < parts.length - 1; i++) {
+				
+						current += (i === 0 ? "" : "/") + parts[i];
+						folderSet.add(current);
+					}
+				}
+
+				const folderCount = folderSet.size;
+                // =========================
+                // UI VALUES
+                // =========================
+                const user =
+                    document.getElementById("githubUser")
+                        ?.value?.trim() || "";
+
+                const token =
+                    document.getElementById("githubToken")
+                        ?.value?.trim() || "";
+
+                const repo =
+                    document.getElementById("repoName")
+                        ?.value?.trim() || "";
+
+                const branch =
+                    document.getElementById("branchName")
+                        ?.value?.trim() || "main";
+
+                const save =
+                    document.getElementById("saveToken")
+                        ?.checked || false;
+                const repoDescription =
+                    document.getElementById("repoDescription")
+                         ?.value?.trim() || "";				
+
+                // =========================
+                // VALIDATION
+                // =========================
+                if (!repo || !token) {
+
+                    showToast(
+                        "Missing repo or token ❌",
+                        "error"
+                    );
+
+                    return;
+                }
+
+                if (files.length === 0) {
+
+                    showToast(
+                        "No valid files dropped ❌",
+                        "error"
+                    );
+
+                    return;
+                }
+
+                // =========================
+                // PAYLOAD
+                // =========================
+				const payload = {
+					type: "github:dropUpload",
+					data: {
+						files: files,
+						folderCount: folderCount,
+						user: user,
+						token: token,
+						repo: repo,
+						branch: branch,
+						save: save,
+						directoryPath: directoryPath,
+						visibility: visibility,
+						repoDescription: repoDescription
+					}
+				};
+
+                // =========================
+                // SEND TO C#
+                // =========================
+                if (window.chrome?.webview) {
+
+                    window.chrome.webview.postMessage(payload);
+
+                    showToast(
+                        `Dropped ${files.length} files / ${folderCount} folders ✔`,
+                        "success"
+                    );
+                }
+                else {
+
+                    console.warn("WebView2 not available");
+
+                    showToast(
+                        "WebView2 unavailable ❌",
+                        "error"
+                    );
+                }
+            }
+            catch (err) {
+
+                console.error("Drop handler error:", err);
+
+                showToast(
+                    "Upload failed ❌",
+                    "error"
+                );
+            }
+        });
+    }
+
+    // =========================
+    // READ FILE AS BASE64
+    // =========================
+	function readFileAsBase64(blob) {
+	
+		return new Promise(async (resolve, reject) => {
+	
+			try {
+	
+				const buffer = await blob.arrayBuffer();
+				const bytes = new Uint8Array(buffer);
+	
+				let binary = "";
+				const chunkSize = 0x8000;
+	
+				for (let i = 0; i < bytes.length; i += chunkSize) {
+	
+					binary += String.fromCharCode.apply(
+						null,
+						bytes.subarray(i, i + chunkSize)
+					);
+				}
+	
+				resolve(btoa(binary));
+	
+			} catch (err) {
+				reject(err);
+			}
+		});
+	}
+    // =========================
+    // SAVE GITHUB CONFIG
+    // =========================
+    function uploadGitHub() {
+
+        const user =
+            document.getElementById("githubUser")
+                ?.value?.trim() || "";
+
+        const token =
+            document.getElementById("githubToken")
+                ?.value?.trim() || "";
+
+        const repo =
+            document.getElementById("repoName")
+                ?.value?.trim() || "";
+
+        const branch =
+            document.getElementById("branchName")
+                ?.value?.trim() || "main";
+
+        const save =
+            document.getElementById("saveToken")
+                ?.checked || false;
+		
+        const directoryPath =
+            document.getElementById("directoryPath")
+                ?.checked || false;
+
+        const repoVisible =
+            document.getElementById("repoVisibility")
+                ?.checked || false;				
+
+        if (!user || !token || !repo) {
+
+            showToast(
+                "Missing required fields ❌",
+                "error"
+            );
+
+            return;
+        }
+
+        const payload = {
+            type: "github:saveall",
+            data: {
+				files: files,
+				folderCount: folderCount,
+				user: user,
+				token: token,
+				repo: repo,
+				branch: branch,
+				save: save,
+				directoryPath: directoryPath,
+				visibility: visibility,
+				repoDescription: repoDescription
+            }
+        };
+
+        if (window.chrome?.webview) {
+
+            window.chrome.webview.postMessage(payload);
+
+            showToast(
+                "GitHub config sent ✔",
+                "success"
+            );
+
+            if (save) {
+
+                showToast(
+                    "Saving enabled ✔",
+                    "info"
+                );
+            }
+        }
+        else {
+
+            showToast(
+                "WebView2 unavailable ❌",
+                "error"
+            );
+        }
+    }
+
+    // =========================
+    // TOAST SYSTEM
+    // =========================
+    function showToast(message, type = "info", duration = 2500) {
+
+        const container =
+            document.getElementById("toast-container");
+
+        if (!container) {
+            console.warn("Missing toast-container");
+            return;
+        }
+
+        const toast = document.createElement("div");
+
+        toast.className = `toast ${type}`;
+        toast.innerText = message;
+
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.classList.add("show");
+        });
+
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+            toast.classList.add("hide");
+
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+
+        }, duration);
+    }
+
+    // =========================
+    // READY
+    // =========================
+    window.addEventListener("DOMContentLoaded", () => {
+
+        showToast(
+            "GitHub Unity Uploader Ready ✔",
+            "success",
+            3000
+        );
+    });
+</script>
+
+
+</body></html>

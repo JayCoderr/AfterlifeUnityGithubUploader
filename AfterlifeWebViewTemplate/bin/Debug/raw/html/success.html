@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Success</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #0b0f14;
+            color: white;
+            font-family: "Segoe UI", sans-serif;
+            overflow: hidden;
+        }
+
+        #root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .card {
+            width: 50%;
+            min-height: 40%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            gap: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        .title {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .status {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .badge {
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid rgba(46, 204, 113, 0.4);
+            color: #2ecc71;
+        }
+
+        .pulse {
+            width: 14px;
+            height: 14px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+            margin-top: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root">
+    <div class="card">
+        <h1 class="title">GitHub Connected</h1>
+        <div class="status" id="statusText">Waiting for status...</div>
+
+        <div class="badge" id="badge">System Ready</div>
+        <div class="pulse"></div>
+    </div>
+</div>
+
+<script>
+    function setStatus(text, color = "#2ecc71") {
+        const status = document.getElementById("statusText");
+        const badge = document.getElementById("badge");
+
+        status.innerText = text;
+        badge.style.color = color;
+        badge.style.borderColor = color;
+        badge.style.background = color + "22";
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        setStatus("Waiting for GitHub events...");
+    });
+
+    // =========================
+    // RECEIVE MESSAGES FROM C#
+    // =========================
+    if (window.chrome && window.chrome.webview) {
+        window.chrome.webview.addEventListener("message", event => {
+            const msg = event.data;
+
+            if (msg === "github:ready") {
+                setStatus("Repository found ✔ Ready to upload");
+            }
+
+            if (msg === "github:repo-created") {
+                setStatus("Repository created ✔ Initializing...");
+            }
+
+            if (msg === "github:invalid") {
+                setStatus("Invalid token ❌", "#e74c3c");
+            }
+
+            if (msg.startsWith("toast:")) {
+                setStatus(msg.replace("toast:", ""));
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
