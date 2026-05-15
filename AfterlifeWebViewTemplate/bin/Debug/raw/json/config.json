@@ -2,12 +2,12 @@
   "lastUploadedFile": "abc1/abc2/2222.txt",
   "uploaded": "2026-05-15T01:11:10.6281796Z",
   "branch": "main",
-  "repository": "TestProjectx4",
-  "user": "JayCoderr",
+  "repository": "",
+  "user": "",
   "githubToken": "",
-  "repoName": "TestProjectx4",
-  "repoDescription": "dasdasdas",
+  "repoName": "",
+  "repoDescription": "",
   "visibility": "public",
-  "fullPath": "abc1/abc2/",
-  "fileName": "2222.txt"
+  "fullPath": "raw/mods/",
+  "fileName": "test.txt"
 }
