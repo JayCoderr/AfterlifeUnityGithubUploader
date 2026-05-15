@@ -1,0 +1,280 @@
+============================
+2026-05-14 11:42:33
+Context: EnsureRepositoryAsync
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AfterlifeUnityGitTool.Form1.EnsureRepositoryAsync() in C:\Users\jayco\source\repos\AfterlifeUnityGithubUpdater\AfterlifeWebViewTemplate\Form1.cs:line 518
+
+============================
+2026-05-14 11:42:33
+Context: EnsureRepositoryAsync
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AfterlifeUnityGitTool.Form1.EnsureRepositoryAsync() in C:\Users\jayco\source\repos\AfterlifeUnityGithubUpdater\AfterlifeWebViewTemplate\Form1.cs:line 518
+
+============================
+2026-05-14 11:42:33
+Context: EnsureRepositoryAsync
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionWaiter`1.WaitForConnectionWithTelemetryAsync(HttpRequestMessage request, HttpConnectionPool pool, Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at AfterlifeUnityGitTool.Form1.EnsureRepositoryAsync() in C:\Users\jayco\source\repos\AfterlifeUnityGithubUpdater\AfterlifeWebViewTemplate\Form1.cs:line 518
+
+============================
+2026-05-14 11:42:34
+Context: GITHUB
+EnsureRepositoryAsync failed
+
+============================
+2026-05-14 11:42:35
+Context: GITHUB
+EnsureRepositoryAsync failed
+
+============================
+2026-05-14 11:42:36
+Context: GITHUB
+EnsureRepositoryAsync failed
+
+============================
+2026-05-14 14:47:39
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 15:28:05
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 15:28:08
+Context: WebMessageReceived
+System.Text.Json.JsonException: The JSON value could not be converted to System.String. Path: $.files[0] | LineNumber: 0 | BytePositionInLine: 11.
+ ---> System.InvalidOperationException: Cannot get the value of a token type 'StartObject' as a string.
+   at System.Text.Json.ThrowHelper.ThrowInvalidOperationException_ExpectedString(JsonTokenType tokenType)
+   at System.Text.Json.Utf8JsonReader.GetString()
+   at System.Text.Json.Serialization.JsonCollectionConverter`2.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TCollection& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.ReadJsonAndSetMember(Object obj, ReadStack& state, Utf8JsonReader& reader)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, Utf8JsonReader& reader, Exception ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, T& value, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Deserialize(Utf8JsonReader& reader, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at AfterlifeUnityGitTool.Form1.WebMessageReceived(Object sender, CoreWebView2WebMessageReceivedEventArgs args) in C:\Users\jayco\source\repos\AfterlifeUnityGithubUpdater\AfterlifeWebViewTemplate\Form1.cs:line 348
+
+============================
+2026-05-14 15:33:44
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 16:12:12
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 16:15:10
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 16:19:12
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 16:23:36
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 17:19:22
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 18:00:56
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 18:01:36
+Context: EnsureRepositoryAsync
+Repo check failed: NotFound
+{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+
+============================
+2026-05-14 18:56:45
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:45
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:45
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:45
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:46
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:46
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:46
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:47
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:47
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:47
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:47
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:56:48
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:16
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:17
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:17
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:17
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:17
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:18
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:18
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:18
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:19
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:19
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:19
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
+============================
+2026-05-14 18:57:19
+Context: GitHub Upload Failed
+{"message":"Branch main not found","documentation_url":"https://docs.github.com/rest/repos/contents#create-or-update-file-contents","status":"404"}
+
